@@ -72,7 +72,8 @@ const App = () => {
       <NavbarComp cart={cart} />
 
     <Routes>
-      <Route path="/" element={<Home />} />
+      <Route path="/" 
+      element={<Home addToCart={addToCart} />} />
       <Route
         path="/products"
         element={<Products addToCart={addToCart} />}

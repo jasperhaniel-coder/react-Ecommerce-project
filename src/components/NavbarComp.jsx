@@ -12,7 +12,8 @@ function NavbarComp({ cart }) {
     { name: "Shop", path: "/products" },
     { name: "About", path: "/about" },
     { name: "Contact", path: "/contact" },
-    { name: "Cart", path: "/cart" }
+    // { name: "Wishlist", path: "/wishlist" },
+    { name: "Cart", path: "/cart" },
   ];
 
   return (
