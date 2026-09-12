@@ -1,39 +1,61 @@
+import { Link, useParams } from "react-router-dom";
+import products from "../data/Products";
+import "./ProductDetails.css";
 
-import { useParams } from "react-router-dom";
-import Products from "../data/Products";
-
-const ProductDetails = ({addToCart}) => {
+const ProductDetails = ({ addToCart }) => {
   const { id } = useParams();
 
-  const product = Products.find(
+  const product = products.find(
     (product) => product.id === Number(id)
   );
 
   if (!product) {
-    return <h1>Product not found</h1>;
+    return (
+      <main className="product-not-found">
+        <h1>Product not found</h1>
+        <Link to="/products">Back to Products</Link>
+      </main>
+    );
   }
 
   return (
-    <main>
-      <h1>{product.name}</h1>
+    <main className="product-details">
+      <Link to="/products" className="back-link">
+        ← Back to Products
+      </Link>
 
-      <img
-        src={product.image}
-        alt={product.name}
-        width="300"
-      />
+      <div className="product-details-content">
+        <div className="product-details-image">
+          <img
+            src={product.image}
+            alt={product.name}
+          />
+        </div>
 
-      <p>Category: {product.category}</p>
+        <div className="product-details-info">
+          <p className="product-details-category">
+            {product.category}
+          </p>
 
-      <p>
-        Price: ₦{product.price.toLocaleString()}
-      </p>
+          <h1>{product.name}</h1>
 
-      <p>{product.description}</p>
+          <p className="product-details-price">
+            ₦{product.price.toLocaleString()}
+          </p>
 
-      <button onClick={() => addToCart(product)}>
-        Add to Cart
-      </button>
+          <p className="product-details-description">
+            {product.description ||
+              "This is a quality product selected to give you great value and a satisfying shopping experience."}
+          </p>
+
+          <button
+            className="product-details-button"
+            onClick={() => addToCart(product)}
+          >
+            Add to Cart
+          </button>
+        </div>
+      </div>
     </main>
   );
 }
