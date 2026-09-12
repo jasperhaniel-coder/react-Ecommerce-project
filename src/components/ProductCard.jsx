@@ -1,4 +1,5 @@
-import "./ProductCard.css";
+import { Link } from "react-router-dom";
+import "../styles/ProductCard.css";
 
 function ProductCard({ product, addToCart }) {
   return (
@@ -20,10 +21,17 @@ function ProductCard({ product, addToCart }) {
 
         <button className="Cart-button"
            onClick={() => addToCart(product)}
-          // onClick={() => setCart((currentCart) => [...currentCart, product])}
+          // onClick={() => setCart((currentCart) => 
+          // [...currentCart, product])}
         >
           Add to Cart
         </button>
+
+        <Link to={`/products/${product.id}`} 
+        className="view-details"
+        >
+          View Details
+        </Link>
 
       </div>
     </article>

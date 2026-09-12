@@ -4,6 +4,7 @@ import Contact from "./pages/Contact";
 import NavbarComp from "./components/NavbarComp";
 import FooterComp from "./components/FooterComp";
 import Products from "./pages/Products";
+import ProductDetails from "./pages/ProductDetails";
 import CartComp from "./pages/CartComp";
 import { useState } from "react";
 import { Routes, Route } from "react-router-dom";
@@ -77,6 +78,10 @@ const App = () => {
       <Route
         path="/products"
         element={<Products addToCart={addToCart} />}
+      />
+      <Route
+        path="/products/:id"
+        element={<ProductDetails addToCart={addToCart} />}
       />
       <Route
         path="/cart"

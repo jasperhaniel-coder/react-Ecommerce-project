@@ -56,3 +56,16 @@
 .Cart-button:hover {
   opacity: 0.8;
 }
+
+.view-details {
+  display: block;
+  width: 100%;
+  padding: 11px;
+  margin-top: 10px;
+  border: 1px solid #111;
+  border-radius: 6px;
+  text-align: center;
+  text-decoration: none;
+  color: #111;
+  box-sizing: border-box;
+}
