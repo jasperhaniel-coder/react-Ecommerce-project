@@ -116,9 +116,12 @@ const CartComp = ({
             </span>
           </div>
 
-          <button className="checkout-button">
+          <Link
+            to="/checkout"
+            className="checkout-button"
+          >
             Proceed to Checkout
-          </button>
+          </Link>
 
           <Link
             to="/products"

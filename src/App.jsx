@@ -6,6 +6,7 @@ import FooterComp from "./components/FooterComp";
 import Products from "./pages/Products";
 import ProductDetails from "./pages/ProductDetails";
 import CartComp from "./pages/CartComp";
+import Checkout from "./pages/Checkout";
 import { useEffect,useState } from "react";
 import { Routes, Route } from "react-router-dom";
 
@@ -102,6 +103,11 @@ const App = () => {
           />
         }
       />
+      <Route
+        path="/checkout"
+        element={<Checkout cart={cart} />}
+      />
+
       <Route path="/about" element={<About />} />
       <Route path="/contact" element={<Contact />} />
     </Routes>

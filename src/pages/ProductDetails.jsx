@@ -73,6 +73,7 @@ const ProductDetails = ({ addToCart }) => {
                   Math.max(1, currentQuantity - 1)
                 )
               }
+              disabled={product.stock === 0}
             >
               −
             </button>
@@ -85,7 +86,9 @@ const ProductDetails = ({ addToCart }) => {
                   Math.min(product.stock, currentQuantity + 1)
                 )
               }
-              disabled={quantity >= product.stock}
+              disabled={
+                product.stock === 0 ||
+                quantity >= product.stock}
             >
               +
             </button>
@@ -94,8 +97,11 @@ const ProductDetails = ({ addToCart }) => {
           <button
             className="product-details-button"
             onClick={() => addToCart(product, quantity)}
-          >
-            Add to Cart
+            disabled={product.stock === 0}
+            >
+              {product.stock === 0
+                ? "Out of Stock"
+                : "Add to Cart"}
           </button>
         </div>
       </div>
