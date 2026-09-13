@@ -6,12 +6,20 @@ import FooterComp from "./components/FooterComp";
 import Products from "./pages/Products";
 import ProductDetails from "./pages/ProductDetails";
 import CartComp from "./pages/CartComp";
-import { useState } from "react";
+import { useEffect,useState } from "react";
 import { Routes, Route } from "react-router-dom";
 
 const App = () => {
 
-  const[cart, setCart] = useState([]);
+  const[cart, setCart] = useState(()=> {
+    const savedCart = localStorage.getItem("cart");
+
+    return savedCart ? JSON.parse(savedCart) : [];
+  });
+
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
 
   const removeFromCart = (productId) => {
     setCart((currentCart) =>
@@ -19,7 +27,7 @@ const App = () => {
     );
   }
 
-  const addToCart = (product) => {
+  const addToCart = (product, quantity = 1) => {
     setCart((currentCart) => {
       const existingProduct = currentCart.find(
         (item) => item.id === product.id
@@ -28,12 +36,12 @@ const App = () => {
       if (existingProduct) {
         return currentCart.map((item) =>
           item.id === product.id
-            ? { ...item, quantity: item.quantity + 1 }
+            ? { ...item, quantity: item.quantity + quantity }
             : item
         );
       }
 
-        return [...currentCart, { ...product, quantity: 1 }];
+        return [...currentCart, { ...product, quantity: quantity }];
       });
   }
 

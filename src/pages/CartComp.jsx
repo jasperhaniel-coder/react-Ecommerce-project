@@ -1,57 +1,135 @@
+import { Link } from "react-router-dom";
+import "../styles/CartComp.css";
 
-
-const CartComp = ({ 
-  cart, 
-  removeFromCart, 
-  increaseQuantity, 
-  decreaseQuantity  
-  }) => {
-
+const CartComp = ({
+  cart,
+  removeFromCart,
+  increaseQuantity,
+  decreaseQuantity
+}) => {
   const total = cart.reduce(
     (sum, product) => sum + product.price * product.quantity,
     0
   );
 
+  if (cart.length === 0) {
+    return (
+      <main className="cart-page empty-cart">
+        <h1>Your Cart is Empty</h1>
+
+        <p>
+          You haven't added any products to your cart yet.
+        </p>
+
+        <Link to="/products" className="continue-shopping">
+          Start Shopping
+        </Link>
+      </main>
+    );
+  }
+
   return (
-    <main>
+    <main className="cart-page">
       <h1>Your Cart</h1>
 
-      {cart.map((product) => (
-        <div key={product.id}>
-          <h2>{product.name}</h2>
+      <div className="cart-layout">
+        <section className="cart-items">
+          {cart.map((product) => (
+            <article className="cart-item" key={product.id}>
+              <img
+                src={product.image}
+                alt={product.name}
+              />
 
-          <p>Price: ₦{product.price.toLocaleString()}</p>
+              <div className="cart-item-info">
+                <p className="cart-item-category">
+                  {product.category}
+                </p>
 
-         <div>
-            <button onClick={() => decreaseQuantity(product.id)}>
-              −
-            </button>
+                <h2>{product.name}</h2>
 
-            <span>{product.quantity}</span>
+                <p className="cart-item-price">
+                  ₦{product.price.toLocaleString()}
+                </p>
 
-            <button onClick={() => increaseQuantity(product.id)}>
-              +
-            </button>
+                <div className="cart-item-actions">
+                  <div className="quantity-controls">
+                    <button
+                      onClick={() =>
+                        decreaseQuantity(product.id)
+                      }
+                    >
+                      −
+                    </button>
+
+                    <span>{product.quantity}</span>
+
+                    <button
+                      onClick={() =>
+                        increaseQuantity(product.id)
+                      }
+                    >
+                      +
+                    </button>
+                  </div>
+
+                  <button
+                    className="remove-button"
+                    onClick={() =>
+                      removeFromCart(product.id)
+                    }
+                  >
+                    Remove
+                  </button>
+                </div>
+              </div>
+
+              <p className="cart-item-subtotal">
+                ₦{(
+                  product.price * product.quantity
+                ).toLocaleString()}
+              </p>
+            </article>
+          ))}
+        </section>
+
+        <aside className="cart-summary">
+          <h2>Order Summary</h2>
+
+          <div className="summary-row">
+            <span>Items</span>
+
+            <span>
+              {cart.reduce(
+                (total, product) =>
+                  total + product.quantity,
+                0
+              )}
+            </span>
           </div>
 
-          <p>
-            Subtotal: ₦
-            {(product.price * product.quantity).toLocaleString()}
-          </p>
+          <div className="summary-row total-row">
+            <span>Total</span>
 
-          <button onClick={() => removeFromCart(product.id)}>
-            Remove
+            <span>
+              ₦{total.toLocaleString()}
+            </span>
+          </div>
+
+          <button className="checkout-button">
+            Proceed to Checkout
           </button>
-        </div>
-      ))}
 
-      <p>Total: ₦{total.toLocaleString()}</p>
-      {/* <button onClick={() => alert("Proceeding to checkout...")}>
-        Proceed to Checkout
-      </button> */}
-
+          <Link
+            to="/products"
+            className="continue-shopping"
+          >
+            Continue Shopping
+          </Link>
+        </aside>
+      </div>
     </main>
-  )
+  );
 }
 
 export default CartComp;

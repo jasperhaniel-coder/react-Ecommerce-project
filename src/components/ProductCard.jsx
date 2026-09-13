@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import "../styles/ProductCard.css";
 
-function ProductCard({ product, addToCart }) {
+const ProductCard = ({ product, addToCart }) => {
   return (
     <article className="product-card">
       <img

@@ -1,0 +1,150 @@
+.product-details {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px;
+}
+
+.back-link {
+  display: inline-block;
+  margin-bottom: 30px;
+  color: #333;
+  text-decoration: none;
+}
+
+.product-details-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.product-details-image img {
+  width: 100%;
+  max-height: 550px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+.product-details-info {
+  max-width: 500px;
+}
+
+.product-details-category {
+  font-size: 14px;
+  color: #777;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+}
+
+.product-details-info h1 {
+  font-size: 42px;
+  margin-bottom: 15px;
+}
+
+.product-details-price {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 25px;
+}
+
+.product-details-description {
+  color: #666;
+  line-height: 1.7;
+  margin-bottom: 30px;
+}
+
+.product-details-button {
+  width: 100%;
+  padding: 15px;
+  border: none;
+  border-radius: 6px;
+  background: #111;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.product-details-brand,
+.product-details-rating,
+.product-details-stock {
+  margin-bottom: 10px;
+}
+
+.product-details-rating {
+  font-weight: 500;
+}
+
+.product-details-stock {
+  color: #555;
+}
+
+.product-details-button:hover {
+  opacity: 0.8;
+}
+
+.product-details-button:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.quantity-selector button:disabled {
+  color: #aaa;
+  cursor: not-allowed;
+}
+
+.product-not-found {
+  text-align: center;
+  padding: 80px 20px;
+}
+
+.product-not-found a {
+  display: inline-block;
+  margin-top: 20px;
+  color: #111;
+}
+
+.quantity-selector {
+  display: flex;
+  align-items: center;
+  width: fit-content;
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.quantity-selector button {
+  width: 45px;
+  height: 45px;
+  border: none;
+  background: #f5f5f5;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.quantity-selector button:hover {
+  background: #e5e5e5;
+}
+
+.quantity-selector span {
+  width: 50px;
+  text-align: center;
+  font-weight: bold;
+}
+
+@media (max-width: 768px) {
+  .product-details {
+    padding: 30px 20px;
+  }
+
+  .product-details-content {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .product-details-info h1 {
+    font-size: 32px;
+  }
+}

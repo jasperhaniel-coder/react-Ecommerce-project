@@ -1,9 +1,13 @@
+import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import products from "../data/Products";
-import "./ProductDetails.css";
+import "../styles/ProductDetails.css";
+
 
 const ProductDetails = ({ addToCart }) => {
   const { id } = useParams();
+
+  const [quantity, setQuantity] = useState(1);
 
   const product = products.find(
     (product) => product.id === Number(id)
@@ -43,14 +47,53 @@ const ProductDetails = ({ addToCart }) => {
             ₦{product.price.toLocaleString()}
           </p>
 
+          <p className="product-details-brand">
+            Brand: {product.brand}
+          </p>
+
+          <p className="product-details-rating">
+            ⭐ {product.rating} / 5
+          </p>
+
+          <p className="product-details-stock">
+            {product.stock > 0
+              ? `${product.stock} items available`
+              : "Out of stock"}
+          </p>
+
           <p className="product-details-description">
             {product.description ||
               "This is a quality product selected to give you great value and a satisfying shopping experience."}
           </p>
 
+          <div className="quantity-selector">
+            <button
+              onClick={() =>
+                setQuantity((currentQuantity) =>
+                  Math.max(1, currentQuantity - 1)
+                )
+              }
+            >
+              −
+            </button>
+
+            <span>{quantity}</span>
+
+            <button
+              onClick={() =>
+                setQuantity((currentQuantity) =>
+                  Math.min(product.stock, currentQuantity + 1)
+                )
+              }
+              disabled={quantity >= product.stock}
+            >
+              +
+            </button>
+          </div>
+
           <button
             className="product-details-button"
-            onClick={() => addToCart(product)}
+            onClick={() => addToCart(product, quantity)}
           >
             Add to Cart
           </button>
